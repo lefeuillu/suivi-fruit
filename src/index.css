@@ -1,111 +1,83 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --bg: #F6F7FB; --panel: #FFFFFF; --line: #E6E8F0; --text: #1F2433; --muted: #6B7280;
+  --yellow: #FACC15; --yellow-dark: #422006; --pill: #FEF3C7; --relance: #B45309; --gold: #D4AF37; --danger: #DC2626;
+  --font: Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; min-height: 100svh; }
 body {
-  margin: 0;
+  background: #F6F7FB; color: #1F2433;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #7846E5; outline-offset: 2px;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+@keyframes shine { 0% { background-position: 150% 0; } 100% { background-position: -100% 0; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } 50% { box-shadow: 0 0 10px 1px rgba(212,175,55,.45); } }
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+.ctt-badge {
+  display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700;
+  padding: 2px 7px; border-radius: 999px; color: #3b2a00;
+  background: linear-gradient(110deg, #B8902B 20%, #F5E08A 45%, #D4AF37 55%, #B8902B 80%);
+  background-size: 250% 100%; animation: shine 3.2s linear infinite;
 }
+.ctt-card { animation: glow 3.2s ease-in-out infinite; }
+.sheet-anim { animation: slideUp .22s ease-out; }
+.fade-anim { animation: fadeIn .15s ease-out; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
+button { transition: transform .12s ease, background-color .2s, border-color .2s; }
+button:not(:disabled):active { transform: scale(.96); }
+.plus-spin svg { transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+.plus-spin:hover svg, .plus-spin:active svg { transform: rotate(90deg); }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+@keyframes rowIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes slideX { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(1); } 35% { transform: scale(1.3); } 70% { transform: scale(.92); } 100% { transform: scale(1); } }
+@keyframes popIn { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@keyframes menuPop { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
+@keyframes rowOut { from { max-height: 120px; opacity: 1; } to { max-height: 0; opacity: 0; margin-bottom: 0; } }
+@keyframes shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(194,65,12,0); transform: scale(1); } 50% { box-shadow: 0 0 0 4px rgba(194,65,12,.18); transform: scale(1.06); } }
+@keyframes sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+@keyframes confetti { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--cx), var(--cy)) scale(.4) rotate(220deg); opacity: 0; } }
+@keyframes fly { 0% { transform: translate(-50%,-50%) scale(.6); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.3); opacity: .2; } }
+@keyframes bump { 0%, 100% { transform: none; } 40% { transform: scale(1.04); } }
+@keyframes bubble { 0% { opacity: 0; transform: translateY(8px) scale(.6); } 25% { opacity: 1; transform: none; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+@keyframes drawIn { from { clip-path: inset(-12px 100% -12px -12px); } to { clip-path: inset(-12px -12px -12px -12px); } }
+@keyframes checkDraw { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 16px) scale(.94); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.row-in { animation: rowIn .38s cubic-bezier(.22,1,.36,1) backwards; }
+.slide-x { animation: slideX .32s cubic-bezier(.22,1,.36,1) backwards; }
+.pop { animation: pop .55s cubic-bezier(.34,1.56,.64,1); }
+.pop-in { animation: popIn .45s cubic-bezier(.34,1.56,.64,1) backwards; }
+.pop-anim { animation: menuPop .22s cubic-bezier(.22,1,.36,1) both; transform-origin: var(--ox, 50%) var(--oy, 100%); }
+.row-out { overflow: hidden; pointer-events: none; animation: rowOut .35s ease-in forwards; }
+.skeleton { background: linear-gradient(110deg, #EDEFF6 30%, #F8F9FD 48%, #EDEFF6 66%); background-size: 250% 100%; animation: shimmer 1.4s linear infinite; }
+.relance-pulse { animation: pulse 2.4s ease-in-out infinite; }
+.sway { transform-origin: 50% 90%; animation: sway 2.6s ease-in-out infinite; }
+.confetti { position: absolute; width: 7px; height: 7px; border-radius: 2px; animation: confetti .8s ease-out forwards; }
+.fly-dot { position: fixed; z-index: 90; width: 16px; height: 16px; border-radius: 50%; pointer-events: none; opacity: 0; animation: fly .8s cubic-bezier(.5,0,.75,.4) forwards; }
+.bump { animation: bump .5s ease .7s; }
+.bubble { animation: bubble 1.6s ease .6s backwards; }
+.draw { animation: drawIn 1.1s cubic-bezier(.45,.05,.25,1) backwards; }
+.check-draw { stroke-dasharray: 24; animation: checkDraw .4s ease .1s backwards; }
+.toast-in { animation: toastIn .25s cubic-bezier(.22,1,.36,1) both; transform: translateX(-50%); }
+.toast-timer { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; transform-origin: left; animation: timer linear forwards; opacity: .85; }
+.chip-in { animation: popIn .35s cubic-bezier(.34,1.56,.64,1) backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .ctt-badge, .ctt-card, .sheet-anim, .fade-anim { animation: none !important; }
 }
